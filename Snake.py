@@ -25,6 +25,8 @@ snake = [
     [10, 10]
 ]
 
+growth = 0
+
 direction_x = 1
 direction_y = 0
 
@@ -87,11 +89,18 @@ while running:
         # Food collision
         if snake[0] == food:
 
-            food = [
-                random.randint(0, WIDTH // CELL_SIZE - 1),
-                random.randint(0, HEIGHT // CELL_SIZE - 1)
-            ]
+            growth += 3
 
+            while True:
+                food = [
+                    random.randint(0, WIDTH // CELL_SIZE - 1),
+                    random.randint(0, HEIGHT // CELL_SIZE - 1)
+                ]
+                if food not in snake:
+                    break
+
+        if growth > 0:
+            growth -= 1
         else:
             snake.pop()
 
